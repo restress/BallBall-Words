@@ -1,0 +1,9 @@
+<view class="container">
+    <text class="feedback-label">使用反馈</text>
+    <textarea class="feedback-text" placeholder="请详细你所遇到的问题" bindblur="getContent"/>
+    <text class="connect-label">联系方式</text>
+    <textarea class="connect-text" placeholder="请留下您的联系方式（QQ/微信/邮箱/等）" bindblur="getConnection"/>
+    <button class="feedback-button" bindtap="submitSuggestion">
+      <text class='word-submit'>提交</text>
+    </button>
+</view>

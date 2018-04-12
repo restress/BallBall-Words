@@ -1,0 +1,9 @@
+<view class="container">
+
+  <view class='wordsdescription'>
+    <text class='word-content'>功能介绍</text>
+    <text class='word-content'>{{appfunction}}</text>
+    <text class='word-content'>{{appfuture}}</text>
+  </view>
+
+</view>

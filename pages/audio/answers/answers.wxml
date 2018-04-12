@@ -1,0 +1,6 @@
+
+<view class="container">
+
+  <text class='word-content '>{{text}}</text>
+
+</view>

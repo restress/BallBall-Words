@@ -1,0 +1,25 @@
+/* pages/audio/answers/answers.wxss */
+/* pages/word/word.wxss */
+@font-face {
+font-family: Chalkboard;
+src: url('/assets/font/chalkboard.ttf'),
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.word-content {
+  margin:10rpx 20rpx 20rpx 25%;
+  font-family: Yuanti TC;
+  align-content: center;
+  font-size: 30rpx;
+  color: #585858;
+}
+
+

@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.feedback-label {
+  float: left;
+  margin-top: 40rpx;
+  font-size: 32rpx;
+  color: #455a64;
+}
+
+.feedback-text {
+  margin-top: 40rpx;
+  padding: 30rpx;
+  font-size: 32rpx;
+  width: 80%;
+  border: 2rpx solid #455A64;
+  border-radius: 10rpx;
+}
+
+.connect-label {
+  margin-top: 60rpx;
+  font-size: 32rpx;
+  color: #455a64;
+}
+
+.connect-text {
+  margin-top: 40rpx;
+  padding: 30rpx;
+  font-size: 32rpx;
+  width: 80%;
+  height: 120rpx;
+  border: 2rpx solid #455A64;
+  border-radius: 10rpx;
+}
+
+.feedback-button {
+  display: flex;
+  flex-direction: column;
+  width: 360rpx;
+  height: 70rpx;
+  background-color: #455A64;
+  border: 2rpx solid #455A64;
+  border-radius: 10rpx;
+  align-items: center;
+  margin-top: 10%;
+  margin-left: 25%;
+}
+
+.word-submit{
+  margin: auto;
+  font-family: Songti TC;
+  font-size: 25rpx;
+  color: white;
+}
