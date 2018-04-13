@@ -1,10 +1,19 @@
 # BallBall-Words
-:bow:背单词（日语英语）的微信小程序
+:bow:Making Words Easy
 
-![image](https://github.com/restress/BallBall-Words/blob/master/images/icon.png)
+:pencil:背单词的微信小程序
+
+<img align="center" width="270" style="margin:0px 15px 0px 0px,display:block" src="https://github.com/restress/BallBall-Words/blob/master/images/icon.png">
+
 
 ### 简介
 1. 页面示意图
+
+<img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example1.PNG">
+<img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example2.PNG">
+<img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example3.PNG">
+<img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example4.PNG">
+
 
 2. 功能简介
     * 记单词
