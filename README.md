@@ -12,7 +12,7 @@
 <img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example1.PNG">
 <img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example2.PNG">
 <img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example3.PNG">
-<img align="left" width="195" style="margin:0px 10px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example4.PNG">
+<img align="left" width="195" style="margin:0px 100px 0px 0px" src="https://github.com/restress/BallBall-Words/blob/master/images/example4.PNG">
 
 
 2. 功能简介
