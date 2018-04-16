@@ -50,7 +50,8 @@ Page({
     wordNumber:1,
     nowWord:0,
     toView: 'red',
-    scrollTop: 100
+    scrollTop: 100,
+    hidden: false
   },
 
   /**
@@ -89,6 +90,10 @@ Page({
           console.error('网络请求失败');
           return;
         }
+        that.setData({
+          //设置加载条
+          hidden: !that.data.hidden
+        })
       }
     })
   },

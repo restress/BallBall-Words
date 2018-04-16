@@ -4,6 +4,7 @@
   <text class='sound-title'>《大家的日语1》</text>
   <text class='sound-title'>{{playJapanesePart}}</text>
   <text class='sound-title'>第{{wordNumber}}个单词</text>
+  <loading hidden="{{hidden}}">加载中...</loading>
 
   <view class='control-div'>
     <view class='button-miss' catchtap='autoSound'><text class='word-miss' catchtap='autoSound'>自动听写</text></view>

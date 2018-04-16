@@ -117,7 +117,7 @@ src: url('/assets/font/chalkboard.ttf'),
 .book_icon{
  display: inline-block;
  position: absolute;
- width: 100%;
+ width: 30%;
  height: 0%;
  margin-top: 1.6%;
 }
@@ -126,5 +126,5 @@ src: url('/assets/font/chalkboard.ttf'),
   width: 20px;
   height: 10px;
   position: absolute;
-  left: 35%;
+  left: 100%;
 }

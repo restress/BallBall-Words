@@ -13,7 +13,8 @@ Page({
    */
   data: {
     list: "",
-    text:initData
+    text:initData,
+    hidden: false
   },
 
   /**
@@ -40,7 +41,8 @@ Page({
         console.log(extraLine)
 
         that.setData({
-          text: initData + '\n' + extraLine.join('\n')
+          text: initData + '\n' + extraLine.join('\n'),
+          hidden: !that.data.hidden
         })
 
         if (res == null || res.data == null) {
