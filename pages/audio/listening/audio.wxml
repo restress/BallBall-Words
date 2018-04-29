@@ -1,25 +1,22 @@
 <!--pages/audio/audio.wxml-->
 <view class='container'>
-
-  <text class='sound-title'>《大家的日语1》</text>
+<progress class='word-progress' percent='{{percent}}' activeColor='#455A64'></progress>
+<!-- 
+   <text class='sound-title'>《大家的日语1》</text>
   <text class='sound-title'>{{playJapanesePart}}</text>
-  <text class='sound-title'>第{{wordNumber}}个单词</text>
+  <text class='sound-title'>第{{wordNumber}}个单词</text>  -->
+
   <loading hidden="{{hidden}}">加载中...</loading>
 
-  <view class='control-div'>
-    <view class='button-miss' catchtap='autoSound'><text class='word-miss' catchtap='autoSound'>自动听写</text></view>
-    <view class='button-miss' catchtap='lastSound'><text class='word-miss' catchtap='lastSound'>上一个</text></view>
-    <view class='button-miss' catchtap='nextSound'><text class='word-miss' catchtap='nextSound'>下一个</text></view>
-    <view class='button-miss' catchtap='showAnswers'><text class='word-miss'  catchtap='showAnswers'>看答案</text></view>
-  </view>
-  <!-- <view class='control-div'>
-    <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex; overflow:scroll; width:200px">
-      <view style="background: red; width: 200px; height: 100px; display: inline-block" ></view>
-      <view style="background: green; width: 200px; height: 100px; display: inline-block"></view>
-      <view style="background: blue; width: 200px; height: 100px; display: inline-block"></view>
-      <view style="background: yellow; width: 200px; height: 100px; display: inline-block"></view>
-    </scroll-view>
-  </view> -->
+  <text wx:if="{{showNot}}" class="sound-title">{{definition}}</text>
+  <text wx:if="{{showNot}}" class="sound-title">{{pronounce}}</text>
+  <text wx:if="{{showNot}}" class="sound-title">{{description}}</text>
 
+  <view class='control-div'>
+    <view class='button-miss' catchtap='stillSound'><text class='word-miss' catchtap='stillSound'>再听一次</text></view>
+    <view class='button-miss' catchtap='nextSound'><text class='word-miss' catchtap='nextSound'>下一个</text></view>
+    <view class='button-miss' catchtap='showAnswer'><text class='word-miss'  catchtap='showAnswer'>看答案</text></view>
+  </view>
+ 
 </view>
 

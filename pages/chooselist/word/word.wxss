@@ -13,6 +13,12 @@ src: url('/assets/font/chalkboard.ttf'),
   box-sizing: border-box;
 }
 
+.word-progress{
+  margin-top: 20rpx;
+  height: 5rpx;
+  width: 500rpx;
+}
+
 .button-view{
   display: flex;
   flex-direction: row;

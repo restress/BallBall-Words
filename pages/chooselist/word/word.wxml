@@ -1,20 +1,30 @@
-<view class="container">
+<view class="container"   catchtap='read'>
+<progress class='word-progress' percent='{{percent}}' activeColor='#455A64'></progress>
+
     <text class="word-content">{{content}}</text>
     <view class="pron-container">
       <image class="pron-icon" src="/images/pron-icon.png"></image>
       <text class="word-pron" bindtap="read">/{{pron}}/</text>
-
+      <image class="pron-icon" src="{{toneIcon}}"></image>
     </view>
 
     <view> 
-        <text class='word-tone'>声调：</text>
-        <text class='word-tone'>{{tone}}</text>
+        <!-- <text class='word-tone'>声调：</text>
+        <text class='word-tone'>{{tone}}</text> -->
         <loading hidden="{{hidden}}">加载中...</loading>
     </view>
 
-     <text wx:if="{{showNot}}" class="word-definition">{{definition}}</text>
+    <view> 
+        <text class='word-tone'>熟练度：</text>
+        <text class='word-tone'>{{proficiency}}</text>
+        <loading hidden="{{hidden}}">加载中...</loading>
+    </view>
+
+    <view>
+      <text wx:if="{{showNot}}" class="word-definition">{{definition}}</text>
+    </view>
     
-   
+    
     <view class='button-view'>
       <view class="button-miss" catchtap="show">
         <text class="word-miss" catchtap="show">不认识</text>
@@ -22,6 +32,7 @@
       <view class="button-miss" catchtap="next">
         <text class="word-next" catchtap="next">下一个</text>
       </view>
+
     </view>
     
 </view>

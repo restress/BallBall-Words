@@ -36,6 +36,16 @@
   border-bottom: 1rpx solid #E5E5E5;
 }
 
+.list-contact{
+  display: flex;
+  flex-direction: row;
+  height: 88rpx;
+  width: 100%;
+  background-color: #fff;
+  padding-left: 0rpx;
+  border: 0px;
+}
+
 .list-name {
   margin-left: 32rpx;
   line-height: 88rpx;

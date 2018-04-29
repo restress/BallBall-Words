@@ -1,9 +1,16 @@
 <view class="container">
 
-  <view class='wordsdescription'>
+  <!-- <view class='wordsdescription'>
     <text class='title-content'>软件说明</text>
     <text class='word-content'>{{appfunction}}</text>
     <text class='word-content'>{{appfuture}}</text>
-  </view>
+  </view> -->
+
+    <image src='{{image}}' mode='aspectFit' bindtap="previewImage" class='good-img'></image>
+
+    <text class='title-content'>1.点击赞赏码</text>
+    <text class='title-content'>2.长按识别二维码</text>
+    <text class='title-content'>即可赞赏啦~</text>
+
 
 </view>

@@ -78,11 +78,13 @@ Page({
     this.setData({
       content: e.detail.value
     })
+    console.log('content:' + e.detail.value)
   },
   getConnection: function (e) {
     this.setData({
       connect: e.detail.value
     })
+    console.log('connect:'+e.detail.value)
   },
   getNowFormatDate: function () {
     var date = new Date();
@@ -104,15 +106,17 @@ Page({
   submitSuggestion: function () {
     //TODO 此处需要上传到数据库中
     that = this;
+    //http://localhost:52016/Feedback/SetFeedback?feedbackContent=%22hhhh%22&&feedbackConnect=%22jjjj%22&&userNickname=%222222%22
+   
     wx.request({
       url: 'https://www.osinglar.top/feedback/SetFeedback',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       method: "POST",
-      data: Util.json2Form({ feedbackContent: this.data.content, feedbackConnect: this.data.connect, userNickname: this.data.userInfo.nickName}),
+      data: Util.json2Form({feedbackContent: that.data.content, feedbackConnect: that.data.connect, userNickname: that.data.userInfo.nickName}),
       complete: function (res) {
-
+        console.log(res)
         wx.showModal({
           title: '提示',
           content: '提交成功!',
@@ -138,6 +142,9 @@ Page({
           })
           return;
         }
+
+
+
       }
     })
 

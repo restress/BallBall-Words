@@ -1,5 +1,5 @@
 // pages/audio/audio.js
-var wordDuration
+var wordDuration//记录单词有多少个
 var beginTime=0;
 var endTime=2;
 var wordTimeInterval = 2000; //单词之间的时间间距
@@ -10,35 +10,18 @@ var autoPlayWord = null
 var autoPlayLastWord = null
 var book=1;//记录是第几本书
 var part=1;//记录是第几个部分
-var audioSrc = ['http://audio.xmcdn.com/group21/M07/43/69/wKgJLViSs2ziVoJMAAlbd6WA0tI318.mp3',
-'http://aod.tx.xmcdn.com/group21/M08/4F/C6/wKgJKFiUWKmylyY5AA76pssbfoE885.mp3',
-'http://audio.xmcdn.com/group23/M06/5E/EC/wKgJNFiW3UWyNKHhAAzdbEwYzgw437.mp3',
-'http://audio.xmcdn.com/group23/M06/5F/37/wKgJL1iW3VGj5qE4ABGTI5raUdA393.mp3',
-'http://audio.xmcdn.com/group23/M06/5E/EE/wKgJNFiW3VeR_dmAABCkxaIe9lU558.mp3',
-'http://audio.xmcdn.com/group24/M00/5F/39/wKgJMFiXKOaAwqOyAA-dGSZ_Bng382.mp3',
-'http://audio.xmcdn.com/group24/M00/5F/8A/wKgJNViXKPCh3UEFAA2Td2aHuyU191.mp3',
-'http://audio.xmcdn.com/group24/M00/5F/3D/wKgJMFiXKPvDPTyIABO5V2k-hEA107.mp3',
-'http://audio.xmcdn.com/group22/M06/60/90/wKgJM1iXKT-SZtakABBY2rfgASk809.mp3',
-'http://audio.xmcdn.com/group22/M06/60/91/wKgJM1iXKUPhAYgFAA7V6iHYMAE932.mp3',
-'http://audio.xmcdn.com/group22/M06/60/92/wKgJM1iXKU_SgEQyABMSz75FTVU717.mp3',
-'http://audio.xmcdn.com/group22/M06/60/93/wKgJM1iXKVHigCYHAA2zTWpK7vE212.mp3',
-'http://audio.xmcdn.com/group23/M06/60/A2/wKgJNFiXKa7RnBZ-AAzQXRM5GkE409.mp3',
-'http://audio.xmcdn.com/group23/M06/60/A4/wKgJNFiXKbjj6q9KAA02ZxjT3rE043.mp3',
-'http://audio.xmcdn.com/group23/M06/60/A4/wKgJNFiXKbrQixzTAAjVln4Xd10398.mp3',
-'http://audio.xmcdn.com/group22/M0B/60/C9/wKgJLliXKcWQ2BFdAA6NQnvsdjE795.mp3',
-'http://audio.xmcdn.com/group22/M00/60/96/wKgJM1iXKcuj4Q2YAAyK-ZFFcsc547.mp3',
-'http://audio.xmcdn.com/group24/M01/5F/3F/wKgJMFiXKdLTDlw_AApPjMybUZ8841.mp3',
-'http://audio.xmcdn.com/group24/M01/5F/3F/wKgJMFiXKdWQQj8LAAo3Djk0N4g347.mp3',
-'http://audio.xmcdn.com/group24/M01/5F/40/wKgJMFiXKd3B9o2AAAlfjDLVAt8693.mp3',
-'http://audio.xmcdn.com/group24/M01/5F/41/wKgJMFiXKeKgHoXPAAtp_lm3Qz8834.mp3',
-'http://audio.xmcdn.com/group24/M01/5F/42/wKgJMFiXKeXCYMH0AAa2u3ubFew615.mp3',
-'http://audio.xmcdn.com/group24/M01/5F/92/wKgJNViXKezSPN09AApUcUCk7Rc197.mp3',
-'http://audio.xmcdn.com/group24/M01/5F/43/wKgJMFiXKe_xfh4FAAccxVply3E470.mp3',
-'http://audio.xmcdn.com/group23/M07/77/C6/wKgJL1id0fvS0Bt4AAZQsENd3FA021.mp3']
+var audioList;//记录单词
+var nowWord;
+var wordSum;
+var wordPass;
+var tempAudioPath = ''
+// const emitter = new EventEmitter()
+// emitter.setMaxListeners(100)//指定一个最大监听数量
+// emitter.setMaxListeners(0)//或者关闭最大监听阈值
+
 
 var Util = require('../../../data/utils.js');
 
-var order = ['red', 'yellow', 'blue', 'green', 'red']
 
 Page({
   /**
@@ -51,25 +34,21 @@ Page({
     nowWord:0,
     toView: 'red',
     scrollTop: 100,
-    hidden: false
+    hidden: false,
+    audioList:"",
+    nowWord:"",
+    definition:"",
+    pronounce:"",
+    description:"",
+    percent:1,
+    wordSum:0,
+    wordPass:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //TODO 此处需要根据不同的课本和part来改变
-    innerAudioContext = wx.createInnerAudioContext()
-    innerAudioContext.src = audioSrc[options.part]
-
-    innerAudioContext.onPlay(()=>{
-      console.log('开始播放')
-    })
-    innerAudioContext.onError((res) =>{
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
-
     this.setData({
       playJapanesePart:"第"+options.part+"课"
     })
@@ -85,17 +64,54 @@ Page({
       data: Util.json2Form({ BookId:1, PartId:1 }),
       complete: function (res) {
         wordDuration = res.data.length
-        console.log('单词量' + wordDuration)
+        // console.log('单词量' + wordDuration)
+
         if (res == null || res.data == null) {
           console.error('网络请求失败');
           return;
         }
+
+        //任选一个听写
+        var idx = Math.floor(Math.random() * (res.data.length - 1))
         that.setData({
           //设置加载条
-          hidden: !that.data.hidden
+          hidden: !that.data.hidden,
+          audioList: res.data,
+          nowWord: res.data[idx],
+          definition: res.data[idx].WordContent,
+          pronounce: res.data[idx].WordPronounciation,
+          description: res.data[idx].WordDescription,
+          showNot: false,
         })
+
+        wordSum= res.data.length
+        wordPass=0
+
+        var japanWord = that.data.nowWord.WordContent
+        var fdStart = japanWord.indexOf("～");
+        if (fdStart == 0) {
+          //表示strCode是以~开头；
+          japanWord = that.data.nowWord.WordContent.replace("～", "");
+        } 
+
+        //TODO 此处需要根据不同的课本和part来改变
+        innerAudioContext = wx.createInnerAudioContext()
+        innerAudioContext.src = 'http://fanyi.baidu.com/gettts?lan=jp&text=' + encodeURIComponent(japanWord) + '&spd=3&source=web'
+        innerAudioContext.autoplay = true
+        
+        innerAudioContext.onPlay(() => {
+          // console.log('开始播放')
+        })
+        innerAudioContext.onError((res) => {
+          // console.log(res.errMsg)
+          // console.log(res.errCode)
+        })
+
       }
     })
+
+   
+
   },
 
   /**
@@ -148,108 +164,79 @@ Page({
   onShareAppMessage: function () {
   
   },
-  autoSound: function () {
-    var that = this;
-    innerAudioContext.autoplay = true
-    nowWord = 1
-    console.log('播放单词'+nowWord)
-
-    interval = setInterval(function(){
-      console.log('播放个数22：：' + wordDuration);
-      nowWord++;
-      that.setData({
-        wordNumber: nowWord
-      })
-      if (nowWord >= wordDuration){
-        clearInterval(interval)
-        console.log('播放个数22：：' + nowWord);
-      }else{
-        console.log('播放个数11：：' + nowWord);
-        that.interval
-      }
-    },2000)
-
-    this.interval;
-  },
-  //TODO 稍微按快一点就会有问题
-  lastSound: function () {
-    var that = this;
-    clearInterval(interval)
-    beginTime = beginTime - 2
-    endTime = endTime - 2
-    nowWord --
-  
-    //如果是第一个单词，那么就重复听写第一个单词
-    if (beginTime <= 1) {
-      beginTime = 0
-      endTime = 2
-      nowWord = 1
-    }
-
-    that.setData({
-      wordNumber: nowWord
-    })
-
-    autoPlayLastWord = setTimeout(function () {
-      console.log('第' + beginTime/2 + '个单词');
-      innerAudioContext.pause()
-      console.log('停了');
-    }, wordTimeInterval)
-
-    if (beginTime > 1) {
-      innerAudioContext.startTime = beginTime
-      innerAudioContext.play()
-      this.autoPlayWord
-    } else {
-      beginTime = 0
-      endTime = 2
-      innerAudioContext.startTime = beginTime
-      innerAudioContext.play()
-      this.autoPlayWord
-    }
-   
-  },
   nextSound: function () {
+
     var that = this;
-    clearInterval(interval)
-    beginTime = beginTime + 2
-    endTime = endTime + 2
-    nowWord++
+    //删掉已经听过的单词
+    // console.log(that.data.audioList)
+    var position = that.data.audioList.indexOf(that.data.definition)
+    that.data.audioList.splice(position, 1)
+    // console.log(that.data.audioList)
+
+  
+    //任选一个听写
+    var idx = Math.floor(Math.random() * (that.data.audioList.length - 1))
+
+    wordPass = wordPass + 1//每次按下next都算是见过一次面了
+    // console.log(wordPass)
+    // console.log(wordSum)
 
     that.setData({
-      wordNumber: nowWord
+      //设置加载条
+      nowWord: that.data.audioList[idx],
+      definition: that.data.audioList[idx].WordContent,
+      pronounce: that.data.audioList[idx].WordPronounciation,
+      description: that.data.audioList[idx].WordDescription,
+      showNot: false,
+      percent: wordPass * 100 / wordSum 
     })
 
-    autoPlayWord = setTimeout(function () {
-      console.log('第' +beginTime/2 + '个单词');
-      innerAudioContext.pause()
-      console.log('停了');
-    }, wordTimeInterval)
+    var japanWord = that.data.nowWord.WordContent
+    var fdStart = japanWord.indexOf("～");
+    if (fdStart == 0) {
+      //表示strCode是以~开头；
+      japanWord = that.data.nowWord.WordContent.replace("～", "");
+    } 
 
-    if (beginTime <= 1) {
-      beginTime = 0
-      innerAudioContext.startTime = beginTime
-      innerAudioContext.play()
-      this.autoPlayWord
-    } else {
-      innerAudioContext.play()
-      this.autoPlayWord
+    //TODO 此处需要根据不同的课本和part来改变
+    innerAudioContext.src = 'http://fanyi.baidu.com/gettts?lan=jp&text=' + encodeURIComponent(japanWord) + '&spd=3&source=web'
+    innerAudioContext.autoplay = true
+    // console.log(that.data.nowWord)
+
+    innerAudioContext.onPlay(() => {
+      // console.log('开始播放')
+    })
+    innerAudioContext.onError((res) => {
+      // console.log(res.errMsg)
+      // console.log(res.errCode)
+    })
+
+  },
+  showAnswer: function(){
+    this.setData({
+      showNot: true
+    })
+  },
+  stillSound:function(){
+    var that = this
+    var japanWord = that.data.nowWord.WordContent
+    var fdStart = japanWord.indexOf("～");
+    if (fdStart == 0) {
+      //表示strCode是以~开头；
+      japanWord = that.data.nowWord.WordContent.replace("～", "");
     }
-  }, 
-  showAnswers: function () {
-    clearInterval(interval)
-    wx.navigateTo({
-      url: '../answers/answers?book=' + 1 + '&&part=' + 1,
-      success: function (res) {
-        // success
-      },
-      fail: function () {
-        // fail
-      },
-      complete: function () {
-        // complete
-      }
+
+    //TODO 此处需要根据不同的课本和part来改变
+    innerAudioContext.src = 'http://fanyi.baidu.com/gettts?lan=jp&text=' + encodeURIComponent(japanWord) + '&spd=3&source=web'
+    innerAudioContext.autoplay = true
+    // console.log(that.data.nowWord)
+
+    innerAudioContext.onPlay(() => {
+      // console.log('开始播放')
     })
-    
+    innerAudioContext.onError((res) => {
+      // console.log(res.errMsg)
+      // console.log(res.errCode)
+    })
   }
 })

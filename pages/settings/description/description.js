@@ -18,6 +18,8 @@ Page({
     "如果使用了这个小程序的大家有什么想背的单词，什么语言都可以，只要给我提供单词表，我也可以加进来满足大家的需求，有这个需求的朋友可以在用户反馈里留下联系方式，我会联系你的。" + '\n' +
     "3.最后做好这个小程序" + '\n' +
     '作为一个市场上的小程序，能为大家提供便利是最好的，如果大家有任何建议或想要参与这个小程序，也可以在用户反馈中说明。这个项目在初步成形后会在github开源。',
+    image:'../../../images/good.png',
+    imgalist: ['https://www.osinglar.top/Content/good.png', 'https://www.osinglar.top/Content/good.png'],  
   },
 
   /**
@@ -25,6 +27,12 @@ Page({
    */
   onLoad: function (options) {
   
+  },
+  previewImage: function (e) {
+    wx.previewImage({
+      current: this.data.imgalist, // 当前显示图片的http链接     
+      urls: this.data.imgalist // 需要预览的图片http链接列表     
+    })
   },
 
   /**

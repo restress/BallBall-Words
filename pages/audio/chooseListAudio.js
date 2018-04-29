@@ -7,6 +7,7 @@ Page({
    */
   data: {
     open: false,
+    open2: false,
     imgsrc: '../../images/ourJapanese.jpg',
     mode: 'aspectFit',
     userInfo: {}
@@ -14,6 +15,11 @@ Page({
   showitem: function (options) {
     this.setData({
       open: !this.data.open
+    })
+  },
+  showitem2: function (options) {
+    this.setData({
+      open2: !this.data.open2
     })
   },
   showWord: function (event) {

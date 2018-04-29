@@ -6,16 +6,28 @@ var that;
 var Util = require('../../../data/utils.js');
 var list;
 var wordsListLen;
+var familiarLevel;
+var levelArr;
+var selectArr;//可供选择的单词的数组
+var innerAudioContext;
+var wordSum;
+var wordPass;
+var tempAudioPath = ''
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     list :"",
     wordsListLen:"",
-    hidden: false
+    hidden: false,
+    content:'',
+    proficiency:1,
+    toneIcon:'../../../images/0.png',
+    percent:1,
+    wordPass:0,
+    wordSum:0
   },
 
   /**
@@ -32,27 +44,53 @@ Page({
       method: "POST",  
       data: Util.json2Form({ BookId: options.book, PartId: options.part }), 
       complete:function(res){
-        //TODO 此处是我修改的，但是这个length是什么样的，还不清楚
+        //legnth是一个单元有多少个单词
         wordsListLen = res.data.length
+        console.log(wordsListLen)
         var idx = Math.floor(Math.random() * (wordsListLen-1)) 
-        var word;
-
+        var word
         that.setData({
-          list:res.data,
+          list: res.data,
           word: res.data[idx],
           content: res.data[idx].WordContent,
           pron: res.data[idx].WordPronounciation,
           definition: res.data[idx].WordDescription,
           tone: res.data[idx].WordTone,
+          toneIcon: '../../../images/' + res.data[idx].WordTone+'.png',
           hidden: !that.data.hidden
         })
+        console.log(res.data)
+        console.log(that.data.list)
+        wx.setStorage({
+          key: that.data.content,
+          data: 1,
+        })
+        console.log(that.data.list)
+        wordSum = that.data.list.length*2//因为有2熟练度，实际上是要见三次面的
+        wordPass = 0
+        console.log(wordPass+':'+wordSum)
 
+        
         if(res == null || res.data == null){
           console.error('网络请求失败');
           return;
         }
+
+        that.read()
       }
     })
+
+    //因为这个ding需要用很多次，所以直接下载下来吧
+    wx.downloadFile({
+      url: 'https://www.osinglar.top/Content/right.mp3',
+      success: function (res) {
+        tempAudioPath = res.tempFilePath
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
+
   },
 
   /**
@@ -72,14 +110,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    //关掉页面之后所有storage全部清除
+    wx.clearStorage()
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    wx.clearStorage()
   },
 
   /**
@@ -109,40 +148,91 @@ Page({
     })
   },
 
-
   next: function () {
-    this.setData({
-      showNot: false
+    //选择下一个的时候 ding一声
+    innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.src = tempAudioPath
+    innerAudioContext.autoplay = true
+    innerAudioContext.onPlay(() => {
+      // console.log('开始播放ding')
     })
-    // var idx = Math.floor(Math.random() * 19) 
-    var idx = Math.floor(Math.random() * (wordsListLen - 1)) 
+    innerAudioContext.onError((res) => {
+      // console.log(res.errMsg)
+    })
 
+    that = this
+
+    wordPass = wordPass + 1//每次按下next都算是见过一次面了
     this.setData({
-      // content: word.content,
-      // pron: word.pron,
-      // definition: word.definition,
-      // audio: word.audio,
-      // tone:word.tone
-      content:this.data.list[idx].WordContent,
-      pron: this.data.list[idx].WordPronounciation,
-      definition: this.data.list[idx].WordDescription,
-      tone: this.data.list[idx].WordTone,
+      showNot: false,
+      percent: wordPass*100/ wordSum 
     })
+    console.log(wordPass+':'+wordSum+':'+that.data.list.length)
+
+    //这里设置用户熟练度到本地
+    //TODO 其实没有考虑到熟练度为空的时候的情况
+    familiarLevel = wx.getStorageSync(that.data.content)
+    console.log(familiarLevel)
+    familiarLevel++
+    console.log(familiarLevel)
+    //如果熟练度到2了就删掉
+    if (familiarLevel == 2) {
+      //判断位置删除
+      var position = that.data.list.indexOf(that.data.content)
+      that.data.list.splice(position,1)
+    }else{
+      wx.setStorage({
+        key: that.data.content,
+        data: familiarLevel,
+      })
+    }
+
+    //TODO 显示完这个框之后会怎么样 此处应该让他们选择是否再来一次 哈哈
+    if(that.data.list.length == 0){
+      wx.showToast({
+        title: '恭喜您学完本课',
+        icon: 'success',
+        duration: 2000
+      }) 
+    }else{
+      var idx = Math.floor(Math.random() * (that.data.list.length - 1))
+      this.setData({
+        content: this.data.list[idx].WordContent,
+        pron: this.data.list[idx].WordPronounciation,
+        definition: this.data.list[idx].WordDescription,
+        tone: this.data.list[idx].WordTone,
+        toneIcon: '../../../images/' + this.data.list[idx].WordTone + '.png',
+        proficiency: familiarLevel
+      })
+      that.read()
+    }
+
   },
   read: function () {
-    console.log(this.data.audio)
-    wx.playVoice({
-      filePath: this.data.audio,
-      success: function (res) {
-        console.log('ok')
-      },
-      fail: function () {
-        // fail
-      },
-      complete: function () {
-        // complete
-      }
+    var japanWord = that.data.content
+    var fdStart = that.data.content.indexOf("～");
+    if (fdStart == 0) {
+      //表示strCode是以~开头；
+      japanWord = that.data.content.replace("～", "");
+    } 
+    innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.src = 'http://fanyi.baidu.com/gettts?lan=jp&text=' + encodeURIComponent(japanWord)+'&spd=3&source=web'
+    innerAudioContext.autoplay = true
+    innerAudioContext.onPlay(() => {
+      // console.log('开始播放')
     })
+    innerAudioContext.onError((res) => {
+      // console.log("chucuole")
+      // console.log(res.errMsg)
+      // console.log(res.errCode)
+      wx.showToast({
+        title: '读音走丢了TAT',  //标题  
+        mask: false,  //是否显示透明蒙层，防止触摸穿透，默认：false  
+        success: function () { }, //接口调用成功的回调函数  
+        fail: function () { },  //接口调用失败的回调函数  
+        complete: function () { } //接口调用结束的回调函数  
+      })
+    })
+   
   }
-  
 })
