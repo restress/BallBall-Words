@@ -18,7 +18,8 @@ var tempAudioPath = ''
 // const emitter = new EventEmitter()
 // emitter.setMaxListeners(100)//指定一个最大监听数量
 // emitter.setMaxListeners(0)//或者关闭最大监听阈值
-
+var bookIdd;
+var partIdd;
 
 var Util = require('../../../data/utils.js');
 
@@ -54,6 +55,13 @@ Page({
     })
 
     var that = this;
+    bookIdd = options.book
+    partIdd = options.part
+    if (bookIdd == 4) {
+      partIdd = 25 + Number(options.part);
+      bookIdd = 3;
+    }
+
     wx.request({
       url: 'https://www.osinglar.top/word/GetJsonWordList',
       header: {
@@ -61,7 +69,7 @@ Page({
       },
       method: "POST",
       //TODO此处需要根据进来的是什么来决定参数
-      data: Util.json2Form({ BookId:1, PartId:1 }),
+      data: Util.json2Form({ BookId: bookIdd, PartId: partIdd }),
       complete: function (res) {
         wordDuration = res.data.length
         // console.log('单词量' + wordDuration)

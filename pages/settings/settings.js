@@ -11,19 +11,35 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面加载word-con
    */
   onLoad: function (options) {
     // 生命周期函数--监听页面加载   
     console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
+    //看用户是否已经授权，如果没有授权就跳转到授权页面
+    var that = this;
+
+    // 判断是否已经授权
+    wx.getSetting({
+      success: (res) => {
+        if (res.authSetting['scope.userInfo']) {//授权了，可以获取用户信息了
+          wx.getUserInfo({
+            success: (res) => {
+              console.log(res)
+              //更新数据
+              that.setData({
+                userInfo: app.globalData.userInfo
+              })
+            }
+          })
+        } else {//未授权，跳到授权页面
+          wx.redirectTo({
+            url: '../authorize/authorize',//授权页面
+          })
+        }
+      }
     })
+
   },
 
   /**
@@ -115,5 +131,7 @@ Page({
         // complete
       }
     })
-  }
+  },
+
+
 })

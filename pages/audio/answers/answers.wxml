@@ -1,7 +1,2 @@
-
-<view class="container">
-
-  <text class='word-content '>{{text}}</text>
-  <loading hidden="{{hidden}}">加载中...</loading>
-
-</view>
+<!--pages/audio/answers/answers.wxml-->
+<text>pages/audio/answers/answers.wxml</text>

@@ -1,0 +1,36 @@
+<view class='journalBook-container'>
+  <view class='flipper' style='{{ style }}'>
+  <!-- 前面的情况 background-color: #686868;-->
+    <view class='front' style='background-image:url("{{ bookCoverUrl + background_id + ".png" }}");' bindtap='onBooksTap'>
+      <view class='shade'>
+        <view class='book-info'>
+          <text class='name'>{{ name }}</text>
+          <text class='summary'>共 {{ count }} 单元</text>
+        </view>
+        <view class='settings-container' catchtap='onSettingsTap'>
+          <image class='settings' src='/assets/imgs/settings.png' />
+        </view>
+      </view>
+    </view>
+
+    <view class='back'>
+      <view class='input-title'>单词本名称：</view>
+      <input class='input' cursor-spacing='150' maxlength='10' placeholder='{{ name }}' value='{{ newName }}' bindblur='onBlur' />
+      <view class='background-title'>单词单元：</view>
+
+      
+      <scroll-view scroll-y style="height:60%;z-index: 100;position：absolute"> 
+        <view class='flex-container'>
+          <view class='book-cover-container' style='{{ item }}' wx:key='id' wx:for='{{ bookCovers }}'>
+            <image class='book-cover' id='{{ index + 1 }}' src='{{ bookCoverUrl + "1."+(index + 1) + ".png" }}' bindtap='onBookCoverTap' />
+          </view>
+        </view>
+      </scroll-view>
+
+      <view class='remove-button-container' bindtap='onReturnButtonTap'>
+        <image class='remove-button' src='/assets/imgs/return.png' />
+      </view>
+     
+    </view>
+  </view>
+</view>

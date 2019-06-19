@@ -1,5 +1,8 @@
-<view class="container"   catchtap='read'>
+<view class="container" style='position：relative'  catchtap='read'>
 <progress class='word-progress' percent='{{percent}}' activeColor='#455A64'></progress>
+<view class="button-listen" catchtap="showListen" style="z-index: 100;position：absolute">
+    <text class="word-listen" catchtap="showListen">听写测试</text>
+</view>
 
     <text class="word-content">{{content}}</text>
     <view class="pron-container">
@@ -20,11 +23,16 @@
         <loading hidden="{{hidden}}">加载中...</loading>
     </view>
 
-    <view>
-      <text wx:if="{{showNot}}" class="word-definition">{{definition}}</text>
+    <view  wx:if="{{showNot}}" class='definition-box'>
+      <text class='word-definition-title'>中文解释：</text>
+      <text  class="word-definition">{{definition}}</text>
+      <text>\n</text>
+      <text  class='word-definition-title'>类似单词：</text>
+      <scroll-view scroll-y style="height:60%;z-index: 100;position：absolute"> 
+        <text class='text_display'> {{likelywords}}</text>
+      </scroll-view>
     </view>
-    
-    
+
     <view class='button-view'>
       <view class="button-miss" catchtap="show">
         <text class="word-miss" catchtap="show">不认识</text>

@@ -1,0 +1,39 @@
+<view class='flex-container'>
+  <swiper class='journalBooks' indicator-dots='true' previous-margin='75rpx' next-margin='75rpx'>
+      <swiper-item class='journalBook' wx:key='{{ item.id }}' wx:for='{{ bookList }}'>
+        <wordBook journal_book_id='{{item.id}}' name='{{ item.name }}' count='{{ item.count }}' background_id='{{ item.background_id }}' bindrefreshBookList='onRefreshBookList' />
+      </swiper-item>
+      <!-- 最后一个是添加按钮 -->
+      <!-- <swiper-item class='journalBook'>
+        <view class='flipper' style='{{ style }}'>
+          <view class='front' bindtap='onNewJournalBookTap'>
+            <image class='add-journalBook-icon' src='/assets/imgs/add-icon.png' />
+            <text class='add-journalBook-text'>新建手帐本</text>
+          </view>
+          <view class='back'>
+            <view class='input-title'>手帐本名称：</view>
+            <input class='input' adjust-position maxlength='10' placeholder='我的手帐本' value='{{ name }}' bindblur='onBlur' />
+            <view class='background-title'>封面图片：</view>
+            <view class='book-cover-flex-container'>
+              <view class='book-cover-container' style='{{ item }}' wx:key='{{ index + 1 }}' wx:for='{{ bookCovers }}'>
+                <image class='book-cover' id='{{ index + 1 }}' src='{{ bookCoverUrl + (index + 1) + ".png" }}' bindtap='onBookCoverTap' />
+              </view>
+            </view>
+            <view class='return-button-container' bindtap='onReturnButtonTap'>
+              <image class='return-button' src='/assets/imgs/return.png' />
+            </view>
+            <view class='submit-button-container' bindtap='onSubmitButtonTap'>
+              <image class='submit-button' src='/assets/imgs/submit.png' />
+            </view>
+          </view>
+        </view>
+      </swiper-item> -->
+    </swiper>
+ 
+
+    <view> 
+          <loading hidden="{{hidden}}">加载中...</loading>
+    </view>
+
+  
+</view>

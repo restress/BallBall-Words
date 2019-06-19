@@ -18,5 +18,10 @@
     <image class="list-icon" src="/images/chevron.png"></image>
   </button>
   <!-- </view> -->
+  <!-- <button open-type='getUserInfo' class="list-contact" bindtap="getUserInfo">
+    <text class="list-name">测试用的</text>
+    <image class="list-icon" src="/images/chevron.png"></image>
+  </button> -->
+   
   </view>
 </view>

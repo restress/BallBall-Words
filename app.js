@@ -52,6 +52,9 @@ App({
     }
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    authorized: true, // 默认值设置为 true 以防止授权数据在 Page.onLoad 之后才返回
+    openId:""
   }
+
 })

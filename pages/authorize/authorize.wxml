@@ -1,0 +1,17 @@
+<!--授权页面-->
+<view wx:if="{{canIUse}}">
+    <view class='header'>
+        <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541568049159&di=2a7c5f20a198ec9bf72c9a84deb9c0db&imgtype=0&src=http%3A%2F%2Fwww.sj520.cn%2Fsc%2Fima%2Fweixin_sj520_25.jpg'></image>
+    </view>
+ 
+    <view class='content'>
+        <view>申请获取以下权限</view>
+        <text>获得你的公开信息(昵称，头像等)</text>
+    </view>
+ 
+    <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+        授权登录
+    </button>
+</view>
+ 
+<view wx:else>请升级微信版本</view>

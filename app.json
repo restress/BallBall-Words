@@ -1,50 +1,22 @@
 {
   "pages": [
-    "pages/chooselist/chooselist",
+    "pages/chooselist/swiperlist",
     "pages/chooselist/word/word",
     "pages/audio/listening/audio",
-    "pages/index/index",
     "pages/logs/logs",
-    "pages/search/search",
-    "pages/grammar/grammar",
     "pages/settings/settings",
     "pages/audio/answers/answers",
-    "pages/audio/chooseListAudio",
     "pages/settings/description/description",
     "pages/settings/feedback/feedback",
-    "pages/settings/using/using"
+    "pages/settings/using/using",
+    "pages/authorize/authorize"
   ],
-  "tabBar": {
-    "backgroundColor": "#455A64",
-    "borderStyle": "white",
-    "selectedColor": "#ffffff",
-    "color": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/chooselist/chooselist",
-        "text": "单词",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home-selected.png"
-      },
-      {
-        "pagePath": "pages/audio/chooseListAudio",
-        "text": "听写",
-        "iconPath": "images/audio.png",
-        "selectedIconPath": "images/audio-selected.png"
-      },
-      {
-        "pagePath": "pages/settings/settings",
-        "text": "设置",
-        "iconPath": "images/setting.png",
-        "selectedIconPath": "images/setting-selected.png"
-      }
-    ]
-  },
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "#455A64",
     "navigationBarBackgroundColor": "#455A64",
     "navigationBarTitleText": "求求单词",
-    "navigationBarTextStyle": "#F2BDD0"
-  }
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
 }
