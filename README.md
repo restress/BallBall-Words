@@ -1,18 +1,30 @@
-# BallBall-Words
-:bow:Making Words Easy
+# BallBall-Words 求求单词
+## :bow: Making Words Easy
 
 :pencil:背单词的微信小程序
 
-<img align="center" width="270"  src="https://github.com/restress/BallBall-Words/blob/master/images/icon.png">
+<img align="left" width="330"  src="https://github.com/restress/BallBall-Words/blob/master/images/icon.png">
+
+![Alt text](https://github.com/restress/BallBall-Words/blob/master/images/scan.jpg)
 
 
 ### 简介
+背单词、即用即抛。
+
+单元形式分类。
+
+可背单词、报听写、学语法。
+
+可拓展其他语言包。~~当然这得看我心情~~（调皮了）
+
 #### 1. 页面示意图
 
-<img align="left" width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/example2.PNG">
-<img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/example1.PNG">
-<img align="left" width="200" src="https://github.com/restress/BallBall-Words/blob/master/images/example4.PNG">
-<img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/example3.PNG">
+<img align="left" width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.1.png">
+<img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.2.png">
+<img align="left" width="200" src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.3.png">
+<img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.4.png">
+<img align="left" width="200" src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.5.png">
+<img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.6.png">
 
 
 
@@ -48,11 +60,4 @@
 4. 增加客服功能
 5. 增加赞赏功能
 
-#### V3.0.0
 
-1. 正式加入英语板块
-2. 日语单词加入“相同汉字”模块，标注读音和汉字
-3. UI重新设计，增加swipe-card
-4. 语料库增加
-5. 增加本地的错题本
-6. 自己写例句，有点赞之类的按钮，并生成分享图
