@@ -19,9 +19,9 @@
 
 #### 1. 页面示意图
 
-<img align="left" width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.1.png">
-<img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.2.png">
-<img align="left" width="200" src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.3.png">
+<img align="left" width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/example5.png">
+<img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/example7.png">
+<img align="left" width="200" src="https://github.com/restress/BallBall-Words/blob/master/images/example6.png">
 <img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.4.png">
 <img align="left" width="200" src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.5.png">
 <img width="200"  src="https://github.com/restress/BallBall-Words/blob/master/images/version/example2.6.png">
@@ -60,4 +60,8 @@
 4. 增加客服功能
 5. 增加赞赏功能
 
+#### V2.0.0
+1. 日语单词加入“相同汉字”联想模块，标读音和汉字，用于区分音读和训读
+2. UI重新设计，使用滑动卡片进行选择
+3. 更新用户授权功能
 
